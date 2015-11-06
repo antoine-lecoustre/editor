@@ -19,7 +19,7 @@ public class Group extends GraphicsObject{
         int endIndex = str.lastIndexOf("}");
 
         parseObjects(str.substring(objectsIndex + 9, groupsIndex - 2));
-        //parseGroups(str.substring(groupsIndex + 8, endIndex - 1));
+        parseGroups(str.substring(groupsIndex + 8, endIndex - 1));
     }
 
     public void add(Object object) {
@@ -101,7 +101,7 @@ public class Group extends GraphicsObject{
         }
     }
 
-    /*private void parseGroups(String groupsStr) {
+    private void parseGroups(String groupsStr) {
         while (!groupsStr.isEmpty()) {
             int separatorIndex = searchSeparator(groupsStr);
             String groupStr;
@@ -118,7 +118,7 @@ public class Group extends GraphicsObject{
                 groupsStr = groupsStr.substring(separatorIndex + 1);
             }
         }
-    }*/
+    }
 
     private void parseObjects(String objectsStr) {
         while (!objectsStr.isEmpty()) {
@@ -166,22 +166,24 @@ public class Group extends GraphicsObject{
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
 
-            if(!(element instanceof Group)){
+            if (!(element instanceof Group)) {
                 str += element.toJson();
                 if (i < m_objectList.size() - 1) {
                     str += ", ";
                 }
+
             }
-
-
         }
+
         str += " }, groups : { ";
 
-        /*for (int i = 0; i < m_groupList.size(); ++i) {
-            Group element = m_groupList.elementAt(i);
+        for (int i = 0; i < m_objectList.size(); ++i) {
+            GraphicsObject element = m_objectList.elementAt(i);
+            if (element instanceof Group) {
+                str += element.toJson();
+            }
 
-            str += element.toJson();
-        }*/
+        }
         return str + " } }";
     }
 
@@ -191,18 +193,22 @@ public class Group extends GraphicsObject{
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
 
-            str += element.toString();
-            if (i < m_objectList.size() - 1) {
-                str += ", ";
+            if (!(element instanceof Group)) {
+                str += element.toString();
+                if (i < m_objectList.size() - 1) {
+                    str += ", ";
+                }
             }
         }
         str += "],[";
 
-        /*for (int i = 0; i < m_groupList.size(); ++i) {
-            Group element = m_groupList.elementAt(i);
+        for (int i = 0; i < m_objectList.size(); ++i) {
+            GraphicsObject element = m_objectList.elementAt(i);
+            if (element instanceof Group) {
+                str += element.toString();
+            }
 
-            str += element.toString();
-        }*/
+        }
         return str + "]]";
     }
 

@@ -7,7 +7,8 @@ public class Group extends GraphicsObject{
     public Group() {
         //m_groupList = new  Vector<Group>();
         m_objectList = new Vector<GraphicsObject>();
-        m_ID = ++ID.ID;
+        m_ID = ID.instance();
+
     }
 
     public Group(String json) {
@@ -111,7 +112,7 @@ public class Group extends GraphicsObject{
             } else {
                 groupStr = groupsStr.substring(0, separatorIndex);
             }
-            m_objectList.add(JSON.parseGroup(groupStr));
+            m_objectList.add(JSON.parse(groupStr));
             if (separatorIndex == -1) {
                 groupsStr = "";
             } else {
@@ -195,6 +196,7 @@ public class Group extends GraphicsObject{
 
             if (!(element instanceof Group)) {
                 str += element.toString();
+                System.out.println(element.toString() + " => " + i);
                 if (i < m_objectList.size() - 1) {
                     str += ", ";
                 }
@@ -207,7 +209,6 @@ public class Group extends GraphicsObject{
             if (element instanceof Group) {
                 str += element.toString();
             }
-
         }
         return str + "]]";
     }

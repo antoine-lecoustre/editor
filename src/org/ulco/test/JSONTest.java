@@ -40,6 +40,7 @@ public class JSONTest extends TestCase {
                 "y: 0.0 }, length: 5.0 }, { type: circle, center: { type: point, x: 5.0, y: 5.0 }, radius: 4.0 } }, " +
                 "groups : {  } } } }";
 
+        System.out.println(JSON.parseGroup(json).toString());
         assertTrue(JSON.parseGroup(json) instanceof Group);
         assertEquals(JSON.parseGroup(json).toString(), "group[[rectangle[point[-6.0,10.0],5.2,9.0]],[group[[square[point[0.0,0.0],5.0], circle[point[5.0,5.0],4.0]],[]]]]");
     }

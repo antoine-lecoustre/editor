@@ -39,6 +39,10 @@ public class Document {
         }
     }
 
+    public Vector<Layer> getLayers(){
+        return m_layers;
+    }
+
     public Layer createLayer() {
         Layer layer = new Layer();
 
@@ -101,15 +105,6 @@ public class Document {
         } else {
             return -1;
         }
-    }
-
-    public GraphicsObjects select(Point pt, double distance) {
-        GraphicsObjects list = new GraphicsObjects();
-
-        for (Layer layer : m_layers) {
-            list.addAll(layer.select(pt, distance));
-        }
-        return list;
     }
 
     public String toJson() {

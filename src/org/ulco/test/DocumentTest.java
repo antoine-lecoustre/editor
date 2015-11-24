@@ -11,9 +11,8 @@ public class DocumentTest extends TestCase {
         Circle c = new Circle(new Point(2, 8), 10);
 
         layer.add(c);
-
-        assertTrue(document.select(new Point(1,1), 8).size() == 1);
-        assertTrue(document.select(new Point(1,1), 8).firstElement().getID() == c.getID());
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).size() == 1);
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).firstElement().getID() == c.getID());
     }
 
     public void testSelect2() throws Exception {
@@ -25,7 +24,7 @@ public class DocumentTest extends TestCase {
         layer.add(c);
         layer.add(s);
 
-        assertTrue(document.select(new Point(1,1), 8).size() == 2);
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).size() == 2);
     }
 
     public void testJSON() throws Exception {

@@ -27,6 +27,32 @@ public class DocumentTest extends TestCase {
         assertTrue(Select.selectDocument(new Point(1,1), 8, document).size() == 2);
     }
 
+    public void testSelectLayerGroup() throws Exception {
+        Document document = new Document();
+        Layer layer = document.createLayer();
+        Circle c = new Circle(new Point(2, 8), 10);
+        Group g = new Group();
+
+        g.add(c);
+        layer.add(g);
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).size() == 1);
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).firstElement().getID() == c.getID());
+    }
+
+    public void testSelectLayerGroup2() throws Exception {
+        Document document = new Document();
+        Layer layer = document.createLayer();
+        Circle c = new Circle(new Point(2, 8), 10);
+        Square s = new Square(new Point(-2, -3), 3);
+        Group g = new Group();
+
+        g.add(c);
+        g.add(s);
+        layer.add(g);
+
+        assertTrue(Select.selectDocument(new Point(1,1), 8, document).size() == 2);
+    }
+
     public void testJSON() throws Exception {
         Document document = new Document();
         Layer l1 = document.createLayer();

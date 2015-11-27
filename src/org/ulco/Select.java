@@ -20,6 +20,14 @@ public class Select {
             if (object.isClosed(pt, distance)) {
                 list.add(object);
             }
+
+            if(object instanceof Group){
+                GraphicsObjects listObjectsGroup = ((Group) object).getObjectList();
+
+                for (GraphicsObject objectGroup : listObjectsGroup) {
+                    list.add(objectGroup);
+                }
+            }
         }
         return list;
     }

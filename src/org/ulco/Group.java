@@ -6,14 +6,14 @@ public class Group extends GraphicsObject{
 
     public Group() {
         //m_groupList = new  Vector<Group>();
-        m_objectList = new Vector<GraphicsObject>();
+        m_objectList = new GraphicsObjects();
         m_ID = ID.instance();
 
     }
 
     public Group(String json) {
         //m_groupList = new  Vector<Group>();
-        m_objectList = new Vector<GraphicsObject>();
+        m_objectList = new GraphicsObjects();
         String str = json.replaceAll("\\s+","");
         int objectsIndex = str.indexOf("objects");
         int groupsIndex = str.indexOf("groups");
@@ -56,6 +56,8 @@ public class Group extends GraphicsObject{
     public int getID() {
         return m_ID;
     }
+
+    public GraphicsObjects getObjectList(){return m_objectList;}
 
     @Override
     boolean isClosed(Point pt, double distance) {
@@ -214,6 +216,6 @@ public class Group extends GraphicsObject{
     }
 
     //private Vector<Group> m_groupList;
-    private Vector<GraphicsObject> m_objectList;
+    private GraphicsObjects m_objectList;
     private int m_ID;
 }
